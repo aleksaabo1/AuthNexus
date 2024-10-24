@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/authentication-lib.iml" filepath="$PROJECT_DIR$/.idea/authentication-lib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/AuthNexus.iml" filepath="$PROJECT_DIR$/.idea/AuthNexus.iml" />
     </modules>
   </component>
 </project>
