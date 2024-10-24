@@ -39,7 +39,7 @@ func IsAuthorized(signKey []byte, endpoint func(http.ResponseWriter, *http.Reque
 	})
 }
 
-func GenerateJWT(signKey, username string) (string, error) {
+func GenerateJWT(signKey []byte, username string) (string, error) {
 	token := jwt.New(jwt.SigningMethodHS256)
 
 	claims := token.Claims.(jwt.MapClaims)
