@@ -1,9 +1,12 @@
-package authentication_lib
+package AuthNexus
 
 import (
+	"crypto/sha256"
+	"encoding/hex"
 	"fmt"
 	"github.com/dgrijalva/jwt-go"
 	"net/http"
+	"time"
 )
 
 func IsAuthorized(signKey []byte, endpoint func(http.ResponseWriter, *http.Request)) http.Handler {
@@ -34,4 +37,27 @@ func IsAuthorized(signKey []byte, endpoint func(http.ResponseWriter, *http.Reque
 			fmt.Fprintf(w, "Not Authorized")
 		}
 	})
+}
+
+func GenerateJWT(signKey, username string) (string, error) {
+	token := jwt.New(jwt.SigningMethodHS256)
+
+	claims := token.Claims.(jwt.MapClaims)
+
+	claims["authorized"] = true
+	claims["user"] = username
+	claims["exp"] = time.Now().Add(time.Minute * 30).Unix()
+
+	tokenString, err := token.SignedString(signKey)
+	if err != nil {
+		return "", err
+	}
+
+	return tokenString, nil
+}
+
+func HashPassword(password string) string {
+	h := sha256.New()
+	h.Write([]byte(password))
+	return hex.EncodeToString(h.Sum(nil))
 }
