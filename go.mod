@@ -1,4 +1,4 @@
-module authentication-lib
+module github.com/aleksaabo1/authentication-lib
 
 go 1.22.5
 
